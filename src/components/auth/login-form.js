@@ -1,7 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { loginAction } from '../../store/login/action';
 
 function LoginForm() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loginAction.logout());
+  }, [dispatch]);
+
   const [inputs, setInputs] = useState({
     username: '',
     password: '',
@@ -12,6 +21,9 @@ function LoginForm() {
 
   const onSubmit = (event) => {
     setSubmitted(true);
+    if (username && password) {
+      dispatch(loginAction.login(username, password));
+    }
     event.preventDefault();
   };
 

@@ -1,5 +1,5 @@
-import actionTypes from './actionTypes';
-import { userService } from '../../services/userService';
+import actionTypes from './action-types';
+import { userService } from '../../services/user-service';
 import { history } from '../../utils/history';
 
 export const loginAction = {
@@ -9,16 +9,17 @@ export const loginAction = {
 
 function login(username, password) {
   return (dispatch) => {
-    dispatch({ type: actionTypes.LOGIN_REQUEST, user: { username } });
+    dispatch({ type: actionTypes.LOGIN_REQUEST, user: { username, password } });
 
     userService.login(username, password).then(
-      ((user) => {
+      (user) => {
         dispatch({ type: actionTypes.LOGIN_SUCCESS, user });
         history.push('/');
       },
       (error) => {
         dispatch({ type: actionTypes.LOGIN_FAILURE, error });
-      })
+        alert(error);
+      }
     );
   };
 }

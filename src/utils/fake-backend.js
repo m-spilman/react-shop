@@ -1,4 +1,3 @@
-// array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
 export function configureFakeBackend() {
@@ -8,7 +7,6 @@ export function configureFakeBackend() {
     const body = opts.body && JSON.parse(opts.body);
 
     return new Promise((resolve, reject) => {
-      // wrap in timeout to simulate server api call
       setTimeout(handleRoute, 500);
 
       function handleRoute() {
@@ -22,20 +20,18 @@ export function configureFakeBackend() {
           case url.match(/\/users\/\d+$/) && method === 'DELETE':
             return deleteUser();
           default:
-            // pass through any requests not handled above
             return realFetch(url, opts)
               .then((response) => resolve(response))
               .catch((error) => reject(error));
         }
       }
 
-      // route functions
-
       function authenticate() {
         const { username, password } = body;
         const user = users.find(
-          (x) => x.username === username && x.password === password
+          (user) => user.username === username && user.password === password
         );
+
         if (!user) return error('Username or password is incorrect');
         return ok({
           id: user.id,
@@ -49,12 +45,15 @@ export function configureFakeBackend() {
       function register() {
         const user = body;
 
-        if (users.find((x) => x.username === user.username)) {
+        if (
+          users.find((existingUser) => existingUser.username === user.username)
+        ) {
           return error(`Username  ${user.username} is already taken`);
         }
 
-        // assign user id and a few other properties then save
-        user.id = users.length ? Math.max(...users.map((x) => x.id)) + 1 : 1;
+        user.id = users.length
+          ? Math.max(...users.map((newUser) => newUser.id)) + 1
+          : 1;
         users.push(user);
         localStorage.setItem('users', JSON.stringify(users));
 
@@ -70,12 +69,10 @@ export function configureFakeBackend() {
       function deleteUser() {
         if (!isLoggedIn()) return unauthorized();
 
-        users = users.filter((x) => x.id !== idFromUrl());
+        users = users.filter((currentUser) => currentUser.id !== idFromUrl());
         localStorage.setItem('users', JSON.stringify(users));
         return ok();
       }
-
-      // helper functions
 
       function ok(body) {
         resolve({

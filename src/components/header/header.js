@@ -45,6 +45,7 @@ function Header() {
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
+                to="#"
               >
                 Dropdown
               </Link>
