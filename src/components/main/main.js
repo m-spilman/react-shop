@@ -1,6 +1,6 @@
 import React from 'react';
-import './main.scss';
 import { Route, Switch, Redirect } from 'react-router';
+
 import AdminOrders from '../../pages/admin-orders';
 import AdminProducts from '../../pages/admin-products';
 import CheckOut from '../../pages/check-out';
@@ -8,6 +8,7 @@ import Orders from '../../pages/orders';
 import OrderSuccess from '../../pages/order-success';
 import Products from '../../pages/products';
 import ShoppingCart from '../../pages/shopping-cart';
+import './main.scss';
 
 function Main() {
   return (

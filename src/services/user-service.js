@@ -22,7 +22,14 @@ function logout() {
   localStorage.removeItem('user');
 }
 
-function register(user) {}
+function register(username, password, firstName, lastName) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'content-Type': 'application/json' },
+    body: JSON.stringify({ firstName, lastName, username, password }),
+  };
+  return fetch('/users/register', requestOptions).then(handleResponse);
+}
 
 function handleResponse(response) {
   return response.text().then((text) => {
