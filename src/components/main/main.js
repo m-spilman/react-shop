@@ -8,6 +8,7 @@ import Orders from '../../pages/orders';
 import OrderSuccess from '../../pages/order-success';
 import Products from '../../pages/products';
 import ShoppingCart from '../../pages/shopping-cart';
+import AddProducts from '../../pages/add-products';
 import './main.scss';
 
 function Main() {
@@ -17,6 +18,7 @@ function Main() {
         <Route exact path="/" component={Products} />
         <Route exact path="/admin-orders" component={AdminOrders} />
         <Route exact path="/admin-products" component={AdminProducts} />
+        <Route exact path="/admin-products/new" component={AddProducts} />
         <Route exact path="/check-out" component={CheckOut} />
         <Route exact path="/orders" component={Orders} />
         <Route exact path="/order-success" component={OrderSuccess} />
