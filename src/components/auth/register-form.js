@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { registerAction } from '../../store/register/action';
 
 function RegisterForm() {
+  const dispatch = useDispatch();
+
   const [inputs, setInputs] = useState({
     username: '',
     password: '',
@@ -14,6 +19,11 @@ function RegisterForm() {
 
   const onSubmit = (event) => {
     setSubmitted(true);
+    if (username && password && firstName && lastName) {
+      dispatch(
+        registerAction.register(username, password, firstName, lastName)
+      );
+    }
     event.preventDefault();
   };
 
