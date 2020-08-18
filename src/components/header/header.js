@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function Header() {
   const [state, setState] = React.useState({ isOpen: false });
   const toggle = () => {
     setState({ ...state, isOpen: !state.isOpen });
   };
+
+  const fullName = useSelector(
+    (state) => state.login.user.firstName + ' ' + state.login.user.lastName
+  );
+
   return (
     <header>
       <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -47,7 +53,7 @@ function Header() {
                 aria-expanded="false"
                 to="#"
               >
-                Dropdown
+                {fullName}
               </Link>
               <div
                 className={'dropdown-menu ' + (state.isOpen ? 'show' : '')}
