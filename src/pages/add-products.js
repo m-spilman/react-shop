@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import CategoryList from '../components/add-products-list/add-products-list';
+import CategoryList from '../components/add-category-list/add-category-list';
+import { useDispatch } from 'react-redux';
+
+import { registerAction } from '../store/register/action';
+import { addProductAction } from '../store/add-product/action';
 
 function AddProducts() {
+  const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
   const [inputs, setInputs] = useState({
     title: '',
     price: '',
-    categoryId: '',
-    imgUrl: '',
+    categoryId: 'Bread',
+    imageUrl: '',
   });
 
   const onChange = (event) => {
@@ -17,12 +22,13 @@ function AddProducts() {
 
   const onSubmit = (event) => {
     setSubmitted(true);
-    if (title && price && category && imgUrl) {
+    if (title && price && categoryId && imageUrl) {
+      dispatch(addProductAction.addProduct(title, price, categoryId, imageUrl));
     }
     event.preventDefault();
   };
 
-  const { title, price, category, imgUrl } = inputs;
+  const { title, price, categoryId, imageUrl } = inputs;
 
   return (
     <div className="col-lg-4 offset-lg-4">
@@ -42,7 +48,8 @@ function AddProducts() {
           )}
         </div>
         <label htmlFor="price">Price</label>
-        <div className="form-group">
+        <div className="input-group">
+          <span className="input-group-addon">$</span>
           <input
             type="text"
             name="price"
@@ -55,7 +62,7 @@ function AddProducts() {
           )}
         </div>
 
-        <select className="form-group" onChange={onChange} name="categoryId">
+        <select className="form-control" onChange={onChange} name="categoryId">
           <CategoryList></CategoryList>
         </select>
 
@@ -63,12 +70,12 @@ function AddProducts() {
           <label htmlFor="img url">Image URL</label>
           <input
             type="text"
-            name="imgUrl"
-            value={imgUrl}
+            name="imageUrl"
+            value={imageUrl}
             onChange={onChange}
             className="form-control"
           />
-          {submitted && !imgUrl && (
+          {submitted && !imageUrl && (
             <div className="invalid-feedback d-block">
               Image URL is required
             </div>
