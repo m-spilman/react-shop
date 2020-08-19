@@ -11,6 +11,8 @@ export function configureFakeBackend() {
 
       function handleRoute() {
         switch (true) {
+          case url.endsWith('/products/add') && method === 'POST':
+            return addProduct();
           case url.endsWith('/users/authenticate') && method === 'POST':
             return authenticate();
           case url.endsWith('/users/register') && method === 'POST':
@@ -24,6 +26,18 @@ export function configureFakeBackend() {
               .then((response) => resolve(response))
               .catch((error) => reject(error));
         }
+      }
+
+      function addProduct() {
+        const product = body;
+        const products = []; // array ?
+
+        product.id = products.length
+          ? Math.max(...products.map((x) => x.id)) + 1
+          : 1;
+        products.push(product);
+        localStorage.setItem('products', JSON.stringify(products));
+        return ok();
       }
 
       function authenticate() {

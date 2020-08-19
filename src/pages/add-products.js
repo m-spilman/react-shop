@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import ProductList from '../components/add-products-list/add-products-list';
+import { registerAction } from '../store/register/action';
 
 function AddProducts() {
+  const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
   const [inputs, setInputs] = useState({
     title: '',
     price: '',
-    categoryId: '',
+    categoryId: 'Bread',
     imgUrl: '',
   });
 
@@ -17,12 +21,13 @@ function AddProducts() {
 
   const onSubmit = (event) => {
     setSubmitted(true);
-    if (title && price && category && imgUrl) {
+    if (title && price && categoryId && imgUrl) {
+      dispatch(registerAction.register(title, price, categoryId, imgUrl));
     }
     event.preventDefault();
   };
 
-  const { title, price, category, imgUrl } = inputs;
+  const { title, price, categoryId, imgUrl } = inputs;
 
   return (
     <div className="col-lg-4 offset-lg-4">
@@ -42,7 +47,8 @@ function AddProducts() {
           )}
         </div>
         <label htmlFor="price">Price</label>
-        <div className="form-group">
+        <div className="input-group">
+          <span className="input-group-addon">$</span>
           <input
             type="text"
             name="price"
