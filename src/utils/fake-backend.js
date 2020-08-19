@@ -1,4 +1,5 @@
 let users = JSON.parse(localStorage.getItem('users')) || [];
+let products = JSON.parse(localStorage.getItem('products')) || [];
 
 export function configureFakeBackend() {
   let realFetch = window.fetch;
@@ -30,10 +31,8 @@ export function configureFakeBackend() {
 
       function addProduct() {
         const product = body;
-        const products = []; // array ?
-
         product.id = products.length
-          ? Math.max(...products.map((x) => x.id)) + 1
+          ? Math.max(...products.map((newProduct) => newProduct.id)) + 1
           : 1;
         products.push(product);
         localStorage.setItem('products', JSON.stringify(products));

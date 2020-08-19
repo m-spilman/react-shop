@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import ProductList from '../components/add-products-list/add-products-list';
-import { registerAction } from '../store/register/action';
+import CategoryList from '../components/add-category-list/add-category-list';
+import { addProductAction } from '../store/add-product/action';
 
 function AddProducts() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ function AddProducts() {
     title: '',
     price: '',
     categoryId: 'Bread',
-    imgUrl: '',
+    imageUrl: '',
   });
 
   const onChange = (event) => {
@@ -21,13 +21,13 @@ function AddProducts() {
 
   const onSubmit = (event) => {
     setSubmitted(true);
-    if (title && price && categoryId && imgUrl) {
-      dispatch(registerAction.register(title, price, categoryId, imgUrl));
+    if (title && price && categoryId && imageUrl) {
+      dispatch(addProductAction.addProduct(title, price, categoryId, imageUrl));
     }
     event.preventDefault();
   };
 
-  const { title, price, categoryId, imgUrl } = inputs;
+  const { title, price, categoryId, imageUrl } = inputs;
 
   return (
     <div className="col-lg-4 offset-lg-4">
@@ -61,20 +61,20 @@ function AddProducts() {
           )}
         </div>
 
-        <select className="form-group" onChange={onChange} name="categoryId">
-          <ProductList></ProductList>
+        <select className="form-control" onChange={onChange} name="categoryId">
+          <CategoryList></CategoryList>
         </select>
 
         <div className="form-group">
           <label htmlFor="img url">Image URL</label>
           <input
             type="text"
-            name="imgUrl"
-            value={imgUrl}
+            name="imageUrl"
+            value={imageUrl}
             onChange={onChange}
             className="form-control"
           />
-          {submitted && !imgUrl && (
+          {submitted && !imageUrl && (
             <div className="invalid-feedback d-block">
               Image URL is required
             </div>

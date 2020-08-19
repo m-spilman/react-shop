@@ -6,14 +6,15 @@ export const addProductAction = {
   addProduct,
 };
 
-function addProduct(title, price, categoryId, imgUrl) {
+function addProduct(title, price, categoryId, imageUrl) {
   return (dispatch) => {
     dispatch({
       type: actionTypes.ADD_PRODUCT_REQUEST,
-      product: { title, price, categoryId, imgUrl },
+      product: { title, price, categoryId, imageUrl },
     });
 
-    productService.addProduct(title, price, categoryId, imgUrl).then(
+    console.log('in action', title, price, categoryId, imageUrl);
+    productService.addProduct(title, price, categoryId, imageUrl).then(
       (product) => {
         dispatch({ type: actionTypes.ADD_PRODUCT_SUCCESS, product });
         history.push('/');

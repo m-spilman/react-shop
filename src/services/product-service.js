@@ -1,15 +1,13 @@
-import handleResponse from './handleResponse';
+import handleResponse from './handle-response';
 
 export const productService = { addProduct };
 
-function addProduct(product) {
-  console.log(product);
+function addProduct(title, price, categoryId, imageUrl) {
+  console.log('in product-service', title, price, categoryId, imageUrl);
   const requestOptions = {
     method: 'POST',
     headers: { ' Content-Type': 'application/json' },
-    body: JSON.stringify(product),
+    body: JSON.stringify({ title, price, categoryId, imageUrl }),
   };
-  return fetch('https://localhose:4000/products/add', requestOptions).then(
-    handleResponse
-  );
+  return fetch('/products/add', requestOptions).then(handleResponse);
 }

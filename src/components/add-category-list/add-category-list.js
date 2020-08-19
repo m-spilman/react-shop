@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ProductList() {
+function CategoryList() {
   const categoryArray = ['Bread', 'Vegetables', 'Fruits', 'Dairy'];
 
   const categoryList = categoryArray.map((product) => {
@@ -13,4 +13,4 @@ function ProductList() {
   return categoryList;
 }
 
-export default ProductList;
+export default CategoryList;

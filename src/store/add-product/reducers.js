@@ -8,7 +8,6 @@ export default (state = initialState, action) => {
     case actions.ADD_PRODUCT_REQUEST:
       return {
         adding: true,
-        product: action.product,
       };
     case actions.ADD_PRODUCT_SUCCESS:
       return {
