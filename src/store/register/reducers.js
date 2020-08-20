@@ -1,6 +1,6 @@
 import actions from './action-types';
 
-let user = {};
+const user = {};
 const initialState = user ? { registered: false, user } : {};
 
 export default (state = initialState, action) => {
