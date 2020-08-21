@@ -13,7 +13,6 @@ function addProduct(title, price, categoryId, imageUrl) {
       product: { title, price, categoryId, imageUrl },
     });
 
-    console.log('in action', title, price, categoryId, imageUrl);
     productService.addProduct(title, price, categoryId, imageUrl).then(
       (product) => {
         dispatch({ type: actionTypes.ADD_PRODUCT_SUCCESS, product });

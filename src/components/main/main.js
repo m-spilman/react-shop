@@ -8,7 +8,7 @@ import Orders from '../../pages/orders';
 import OrderSuccess from '../../pages/order-success';
 import Products from '../../pages/products';
 import ShoppingCart from '../../pages/shopping-cart';
-import AddProducts from '../../pages/add-products';
+import AddProducts from '../add-products/add-products';
 import './main.scss';
 
 function Main() {
