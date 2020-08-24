@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { loginAction } from '../../store/login/action';
+import BuildForm from '../form-builder';
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -32,36 +33,36 @@ function LoginForm() {
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   };
 
+  const fields = [
+    {
+      fieldType: 'input',
+      type: 'text',
+      name: 'username',
+      placeholder: 'User Name',
+      value: username,
+      className: 'form-control',
+      title: '',
+      onChange: onChange,
+      submitted: submitted,
+    },
+    {
+      fieldType: 'input',
+      type: 'password',
+      name: 'password',
+      placeholder: 'Password',
+      value: password,
+      className: 'form-control',
+      title: '',
+      onChange: onChange,
+      submitted: submitted,
+    },
+  ];
+
   return (
     <div className="col-lg-4 offset-lg-4">
       <h2>Login</h2>
       <form name="form" onSubmit={onSubmit}>
-        <div className="form-group">
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={username}
-            onChange={onChange}
-            className="form-control"
-          />
-          {submitted && !username && (
-            <div className="invalid-feedback d-block">Username is required</div>
-          )}
-        </div>
-        <div className="form-group">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={password}
-            onChange={onChange}
-            className="form-control"
-          />
-          {submitted && !password && (
-            <div className="invalid-feedback d-block">Password is required</div>
-          )}
-        </div>
+        <BuildForm fields={fields} />
         <div className="form-group">
           <button className="btn btn-primary">Login</button>
           <Link to="/register" className="btn btn-link">
