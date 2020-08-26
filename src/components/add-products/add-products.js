@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { addProductAction } from '../../store/add-product/action';
 import BuildForm from '../form-builder';
 import ProductCard from './product-card';
+import { productActions } from '../../store/products/action';
 
 import './product.scss';
 
@@ -25,7 +25,8 @@ function AddProducts() {
   const onSubmit = (event) => {
     setSubmitted(true);
     if (title && price && categoryId && imageUrl) {
-      dispatch(addProductAction.addProduct(title, price, categoryId, imageUrl));
+      dispatch(productActions.addProduct(title, price, categoryId, imageUrl));
+      dispatch(productActions.getProducts());
     }
     event.preventDefault();
   };
