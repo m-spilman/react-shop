@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 
 import { addProductAction } from '../../store/add-product/action';
 import BuildForm from '../form-builder';
+import ProductCard from './product-card';
+
+import './product.scss';
 
 function AddProducts() {
   const dispatch = useDispatch();
@@ -74,13 +77,19 @@ function AddProducts() {
   ];
 
   return (
-    <div className="p-5 row col-10 offset-1">
+    <div className=" container p-5 offset-1">
       <div>
         <h2>Add New Product</h2>
-        <form onSubmit={onSubmit}>
-          <BuildForm fields={fields} />
-          <div className="form-group">
-            <button className="btn btn-primary">Add</button>
+        <form onSubmit={onSubmit} className="row">
+          <div className="col-8">
+            <BuildForm fields={fields} />
+
+            <div className="form-group button-spacing">
+              <button className="btn btn-primary">Save Product</button>
+            </div>
+          </div>
+          <div className="col-4">
+            <ProductCard image={imageUrl} title={title} price={price} />
           </div>
         </form>
       </div>
