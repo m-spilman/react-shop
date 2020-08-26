@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import DisplayTable from '../components/display-table';
 
 function AdminProducts() {
-  const products = JSON.parse(localStorage.getItem('products'));
+  const products = useSelector(({ getProducts }) => getProducts.products);
 
   const displayedFields = [
     { header: 'ID', name: 'id' },

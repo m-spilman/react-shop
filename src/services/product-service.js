@@ -1,5 +1,6 @@
 import handleResponse from './handle-response';
 
+// export const productService = { addProduct, getProducts };
 export const productService = { addProduct };
 
 function addProduct(title, price, categoryId, imageUrl) {

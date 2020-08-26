@@ -6,6 +6,7 @@ import BuildForm from '../form-builder';
 import ProductCard from './product-card';
 
 import './product.scss';
+import { getProductAction } from '../../store/view-products/action';
 
 function AddProducts() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function AddProducts() {
     setSubmitted(true);
     if (title && price && categoryId && imageUrl) {
       dispatch(addProductAction.addProduct(title, price, categoryId, imageUrl));
+      dispatch(getProductAction.getProducts);
     }
     event.preventDefault();
   };
