@@ -21,7 +21,7 @@ function AddProducts() {
   const [inputs, setInputs] = useState({
     title: product ? product.title : '',
     price: product ? product.price : '',
-    categoryId: product ? product.price : '',
+    categoryId: product ? product.price : 'Bread',
     imageUrl: product ? product.price : '',
   });
 
