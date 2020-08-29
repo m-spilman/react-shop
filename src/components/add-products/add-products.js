@@ -9,26 +9,20 @@ import ProductCard from './product-card';
 import './product.scss';
 
 function AddProducts() {
- 
-
   const path = window.location.pathname;
   const index = path.lastIndexOf('/');
   const length = path.length;
   const id = Number(path.substr(index + 1, length));
-  const product = useSelector(
-    ({ getProducts }) => getProducts.products[id - 1]
-  );
+  const product = useSelector(({ products }) => products.products[id - 1]);
 
   const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
 
-
-  }
   const [inputs, setInputs] = useState({
     title: product ? product.title : '',
-    price: product ? product.price: '',
-    categoryId: product ? product.price: '',
-    imageUrl: product ? product.price: '',
+    price: product ? product.price : '',
+    categoryId: product ? product.price : '',
+    imageUrl: product ? product.price : '',
   });
 
   const onChange = (event) => {

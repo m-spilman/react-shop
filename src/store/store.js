@@ -4,16 +4,15 @@ import thunkMiddleware from 'redux-thunk';
 
 import loginReducer from './login/reducers';
 import registerReducer from './register/reducers';
-import addProductReducer from './add-product/reducers';
-import getProductsReducer from './view-products/reducers';
+
+import getProductsReducer from './products/reducers';
 
 const Store = createStore(
   combineReducers(
     {
       login: loginReducer,
       register: registerReducer,
-      addProduct: addProductReducer,
-      getProducts: getProductsReducer,
+      products: getProductsReducer,
     },
     composeWithDevTools()
   ),

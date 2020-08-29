@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 import DisplayTable from '../components/display-table';
 
 function AdminProducts() {
-  const products = useSelector(({ getProducts }) => getProducts.products);
+  const products = useSelector(({ products }) => products.products);
+  // const products = useSelector((state) => state.products.products);
 
   const displayedFields = [
     { header: 'ID', name: 'id' },
