@@ -2,12 +2,10 @@ import actionTypes from './action-types';
 import { productService } from '../../services/product-service';
 import { history } from '../../utils/history';
 
-import { getProductAction } from '../view-products/action';
-
-export const addProductAction = {
+export const productAction = {
+  getProducts,
   addProduct,
 };
-
 function addProduct(title, price, categoryId, imageUrl) {
   return (dispatch) => {
     dispatch({
@@ -29,10 +27,23 @@ function addProduct(title, price, categoryId, imageUrl) {
       )
       .then(() => {
         const currentProducts = JSON.parse(localStorage.getItem('products'));
-        dispatch(getProductAction.getProducts(currentProducts));
+        dispatch(productAction.getProducts(currentProducts));
       })
       .then(() => {
         history.push('/admin-products');
       });
+  };
+}
+function getProducts(products) {
+  return (dispatch) => {
+    Promise.resolve(dispatch({ type: actionTypes.GET_PRODUCTS_REQUEST })).then(
+      () => {
+        dispatch({ type: actionTypes.GET_PRODUCTS_SUCCESS, products });
+      },
+      (error) => {
+        alert(error);
+        dispatch({ type: actionTypes.PRODUCTS_FAILURE, error });
+      }
+    );
   };
 }

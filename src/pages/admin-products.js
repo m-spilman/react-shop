@@ -14,7 +14,7 @@ function AdminProducts() {
     { header: 'Edit', name: 'edit' },
   ];
   const isEditable = true;
-  const editUrl = 'edit';
+  const editUrl = `/admin-products/new/`;
 
   return (
     <div>
@@ -25,7 +25,7 @@ function AdminProducts() {
         edit={isEditable}
         url={editUrl}
       />
-      <Link to="/admin-products/new">
+      <Link to="/admin-products/new/0">
         <button className="btn btn-primary">New Product</button>
       </Link>
     </div>

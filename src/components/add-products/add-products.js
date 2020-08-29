@@ -1,21 +1,34 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { addProductAction } from '../../store/add-product/action';
+import { productAction } from '../../store/products/action';
 import BuildForm from '../form-builder';
 import ProductCard from './product-card';
 
 import './product.scss';
-import { getProductAction } from '../../store/view-products/action';
 
 function AddProducts() {
+ 
+
+  const path = window.location.pathname;
+  const index = path.lastIndexOf('/');
+  const length = path.length;
+  const id = Number(path.substr(index + 1, length));
+  const product = useSelector(
+    ({ getProducts }) => getProducts.products[id - 1]
+  );
+
   const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
+
+
+  }
   const [inputs, setInputs] = useState({
-    title: '',
-    price: '',
-    categoryId: 'Bread',
-    imageUrl: '',
+    title: product ? product.title : '',
+    price: product ? product.price: '',
+    categoryId: product ? product.price: '',
+    imageUrl: product ? product.price: '',
   });
 
   const onChange = (event) => {
@@ -26,8 +39,8 @@ function AddProducts() {
   const onSubmit = (event) => {
     setSubmitted(true);
     if (title && price && categoryId && imageUrl) {
-      dispatch(addProductAction.addProduct(title, price, categoryId, imageUrl));
-      dispatch(getProductAction.getProducts);
+      dispatch(productAction.addProduct(title, price, categoryId, imageUrl));
+      dispatch(productAction.getProducts());
     }
     event.preventDefault();
   };
@@ -81,7 +94,7 @@ function AddProducts() {
   return (
     <div className=" container p-5 offset-1">
       <div>
-        <h2>Add New Product</h2>
+        <h2>Product</h2>
         <form onSubmit={onSubmit} className="row">
           <div className="col-8">
             <BuildForm fields={fields} />
