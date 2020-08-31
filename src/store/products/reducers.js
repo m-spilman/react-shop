@@ -26,10 +26,25 @@ export default (state = initialState, action) => {
       };
     case actions.ADD_PRODUCT_SUCCESS:
       return {
+        ...state,
         loading: false,
-        products: [...state.products, action.product],
+        products: action.product,
       };
     case actions.ADD_PRODUCT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
+    case actions.EDIT_PRODUCT_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.EDIT_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case actions.EDIT_PRODUCT_FAILURE:
       return {
         ...state,
         loading: false,

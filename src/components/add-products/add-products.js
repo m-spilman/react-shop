@@ -13,8 +13,16 @@ function AddProducts() {
   const index = path.lastIndexOf('/');
   const length = path.length;
   const id = Number(path.substr(index + 1, length));
-  const product = useSelector(({ products }) => products.products[id - 1]);
+  const products = useSelector(({ products }) => products.products);
+  let product = null;
 
+  if (id !== 0 && products) {
+    for (let i = 0; i <= products.length - 1; i++) {
+      if (products[i].id === id) {
+        product = products[i];
+      }
+    }
+  }
   const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
 
@@ -32,8 +40,14 @@ function AddProducts() {
 
   const onSubmit = (event) => {
     setSubmitted(true);
-    if (title && price && categoryId && imageUrl) {
+    if (id === 0 && title && price && categoryId && imageUrl) {
       dispatch(productAction.addProduct(title, price, categoryId, imageUrl));
+      dispatch(productAction.getProducts());
+    }
+    if (id !== 0 && title && price && categoryId && imageUrl) {
+      dispatch(
+        productAction.editProduct(title, price, categoryId, imageUrl, id)
+      );
       dispatch(productAction.getProducts());
     }
     event.preventDefault();
