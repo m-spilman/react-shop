@@ -16,7 +16,7 @@ function DisplayTable(props) {
         </tbody>
 
         <tbody>
-          {data.data ? (
+          {data.data.length > 0 ? (
             data.data.map((items) => (
               <tr key={items.id}>
                 {data.columns.map((columnName) => (
@@ -31,7 +31,10 @@ function DisplayTable(props) {
               </tr>
             ))
           ) : (
-            <span>nothing</span>
+            // <span>nothing</span>
+            <tr>
+              <td>No products yet, please add a new product</td>
+            </tr>
           )}
         </tbody>
       </table>
