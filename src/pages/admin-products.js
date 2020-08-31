@@ -6,7 +6,6 @@ import DisplayTable from '../components/display-table';
 
 function AdminProducts() {
   const products = useSelector(({ products }) => products.products);
-  // const products = useSelector((state) => state.products.products);
 
   const displayedFields = [
     { header: 'ID', name: 'id' },
@@ -14,6 +13,7 @@ function AdminProducts() {
     { header: 'Price', name: 'price' },
     { header: 'Edit', name: 'edit' },
   ];
+
   const isEditable = true;
   const editUrl = `/admin-products/new/`;
 

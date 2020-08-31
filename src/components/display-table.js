@@ -14,20 +14,25 @@ function DisplayTable(props) {
             ))}
           </tr>
         </tbody>
+
         <tbody>
-          {data.data.map((items) => (
-            <tr key={items.id}>
-              {data.columns.map((columnName) => (
-                <td key={columnName.name}>
-                  {!items[columnName.name] ? (
-                    <Link to={data.url}> Edit </Link>
-                  ) : (
-                    items[columnName.name]
-                  )}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {data.data ? (
+            data.data.map((items) => (
+              <tr key={items.id}>
+                {data.columns.map((columnName) => (
+                  <td key={columnName.name}>
+                    {!items[columnName.name] ? (
+                      <Link to={`${data.url}${items.id}`}> Edit </Link>
+                    ) : (
+                      items[columnName.name]
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))
+          ) : (
+            <span>nothing</span>
+          )}
         </tbody>
       </table>
     );
