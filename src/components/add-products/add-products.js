@@ -100,7 +100,7 @@ function AddProducts() {
   ];
 
   return (
-    <div className=" container p-5 offset-1">
+    <div className=" container-fluid p-5 offset-1">
       <div>
         <h2>Product</h2>
         <form onSubmit={onSubmit} className="row">

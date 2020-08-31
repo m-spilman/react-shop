@@ -1,7 +1,5 @@
 let users = JSON.parse(localStorage.getItem('users')) || [];
-console.log('here');
 let products = JSON.parse(localStorage.getItem('products')) || [];
-console.log('here#@2');
 
 export function configureFakeBackend() {
   let realFetch = window.fetch;
