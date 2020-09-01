@@ -5,6 +5,7 @@ import { history } from '../../utils/history';
 export const productActions = {
   getProducts,
   addProduct,
+  editProduct,
 };
 function addProduct(title, price, categoryId, imageUrl) {
   return (dispatch) => {
@@ -44,5 +45,31 @@ function getProducts(products) {
         dispatch({ type: actionTypes.PRODUCTS_FAILURE, error });
       }
     );
+  };
+}
+function editProduct(title, price, categoryId, imageUrl, id) {
+  return (dispatch) => {
+    dispatch({
+      type: actionTypes.EDIT_PRODUCT_REQUEST,
+      product: { title, price, categoryId, imageUrl, id },
+    });
+    productService
+      .editProduct(title, price, categoryId, imageUrl, id)
+      .then(
+        (product) => {
+          dispatch({ type: actionTypes.EDIT_PRODUCT_SUCCESS, product });
+        },
+        (error) => {
+          dispatch({ type: actionTypes.EDIT_PRODUCT_FAILURE, error });
+          alert(error);
+        }
+      )
+      .then(() => {
+        const currentProducts = JSON.parse(localStorage.getItem('products'));
+        dispatch(productActions.getProducts(currentProducts));
+      })
+      .then(() => {
+        history.push('/admin-products');
+      });
   };
 }

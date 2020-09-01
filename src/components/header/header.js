@@ -28,7 +28,7 @@ function Header() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="shopping-cart">
+              <Link className="nav-link" to="/shopping-cart">
                 Shopping Cart
               </Link>
             </li>
@@ -47,20 +47,20 @@ function Header() {
                 className={'dropdown-menu ' + (state.isOpen ? 'show' : '')}
                 aria-labelledby="dropdown01"
               >
-                <Link className="dropdown-item" to="admin-orders">
+                <Link className="dropdown-item" to="/admin-orders">
                   Admin Orders
                 </Link>
 
-                <Link className="dropdown-item" to="admin-products">
+                <Link className="dropdown-item" to="/admin-products">
                   Admin Products
                 </Link>
-                <Link className="dropdown-item" to="orders">
+                <Link className="dropdown-item" to="/orders">
                   Orders
                 </Link>
-                <Link className="dropdown-item" to="order-success">
+                <Link className="dropdown-item" to="/order-success">
                   Order Success
                 </Link>
-                <Link className="dropdown-item" to="check-out">
+                <Link className="dropdown-item" to="/check-out">
                   Check Out
                 </Link>
               </div>

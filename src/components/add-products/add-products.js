@@ -1,37 +1,55 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
+import { productActions } from '../../store/products/action';
 import BuildForm from '../form-builder';
 import ProductCard from './product-card';
-import { productActions } from '../../store/products/action';
 
 import './product.scss';
 
 function AddProducts() {
+  const id = Number(useParams().id);
+  const products = useSelector(({ products }) => products.products);
+  let product = null;
+  let completedForm = false;
   const dispatch = useDispatch();
   const [submitted, setSubmitted] = useState(false);
+
+  if (id !== 0 && products) {
+    product = products.find((object) => object.id === id);
+  }
+
   const [inputs, setInputs] = useState({
-    title: '',
-    price: '',
-    categoryId: 'Bread',
-    imageUrl: '',
+    title: product ? product.title : '',
+    price: product ? product.price : '',
+    categoryId: product ? product.categoryId : 'Bread',
+    imageUrl: product ? product.imageUrl : '',
   });
 
+  const { title, price, categoryId, imageUrl } = inputs;
   const onChange = (event) => {
     const { name, value } = event.target;
     setInputs((inputs) => ({ ...inputs, [name]: value }));
   };
 
   const onSubmit = (event) => {
-    setSubmitted(true);
     if (title && price && categoryId && imageUrl) {
-      dispatch(productActions.addProduct(title, price, categoryId, imageUrl));
+      completedForm = true;
+    }
+    setSubmitted(true);
+    event.preventDefault();
+    if (completedForm) {
+      if (id === 0) {
+        dispatch(productActions.addProduct(title, price, categoryId, imageUrl));
+      } else {
+        dispatch(
+          productActions.editProduct(title, price, categoryId, imageUrl, id)
+        );
+      }
       dispatch(productActions.getProducts());
     }
-    event.preventDefault();
   };
-
-  const { title, price, categoryId, imageUrl } = inputs;
 
   const fields = [
     {
@@ -78,9 +96,9 @@ function AddProducts() {
   ];
 
   return (
-    <div className=" container p-5 offset-1">
+    <div className=" container-fluid p-5 offset-1">
       <div>
-        <h2>Add New Product</h2>
+        <h2>Product</h2>
         <form onSubmit={onSubmit} className="row">
           <div className="col-8">
             <BuildForm fields={fields} />

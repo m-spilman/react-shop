@@ -4,6 +4,8 @@ import CategoryList from './add-category-list/add-category-list';
 function BuildForm(props) {
   const fields = props.fields;
 
+  
+
   const form = fields.map((field) => {
     switch (field.fieldType) {
       case 'select':
