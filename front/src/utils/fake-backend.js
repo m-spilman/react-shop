@@ -1,5 +1,54 @@
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+
 let users = JSON.parse(localStorage.getItem('users')) || [];
-let products = JSON.parse(localStorage.getItem('products')) || [];
+// let products = JSON.parse(localStorage.getItem('products')) || [];
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/',
+  cache: new InMemoryCache(),
+});
+
+// client
+//   .query({
+//     query: gql`
+//       query TestQuery {
+//         products {
+//           title
+//           price
+//         }
+//       }
+//     `,
+//   })
+//   .then((result) => {
+//     console.log(result.data.products);
+// products = result.data.products;
+// });
+let products = retrieveProducts();
+async function retrieveProducts() {
+  const products = await client.query({
+    query: gql`
+      query TestQuery {
+        products {
+          title
+          price
+        }
+      }
+    `,
+  });
+  return products;
+}
+
+// products = client
+// .query({
+//   query: gql`
+//     query TestQuery {
+//       products {
+//         title
+//         price
+//       }
+//     }
+//   `,
+// })
 
 export function configureFakeBackend() {
   let realFetch = window.fetch;
