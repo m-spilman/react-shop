@@ -30,11 +30,10 @@ export function configureFakeBackend() {
       }
 
       function addProduct() {
-        const product = body;
-        product.id = products.length
+        body.id = products.length
           ? Math.max(...products.map((newProduct) => newProduct.id)) + 1
           : 1;
-        products.push(product);
+        products.push(body);
         localStorage.setItem('products', JSON.stringify(products));
         return ok();
       }
