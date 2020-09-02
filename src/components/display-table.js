@@ -20,7 +20,7 @@ function DisplayTable(props) {
               {data.columns.map((columnName) => (
                 <td key={columnName.name}>
                   {!items[columnName.name] ? (
-                    <Link to={data.url}> Edit </Link>
+                    <Link to={`${data.url}${items.id}`}> Edit </Link>
                   ) : (
                     items[columnName.name]
                   )}

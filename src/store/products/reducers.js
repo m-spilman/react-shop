@@ -36,6 +36,20 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
       };
+    case actions.EDIT_PRODUCT_REQUEST:
+      return {
+        loading: true,
+      };
+    case actions.EDIT_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case actions.EDIT_PRODUCT_FAILURE:
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }

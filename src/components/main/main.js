@@ -18,7 +18,7 @@ function Main() {
         <Route exact path="/" component={Products} />
         <Route exact path="/admin-orders" component={AdminOrders} />
         <Route exact path="/admin-products" component={AdminProducts} />
-        <Route exact path="/admin-products/new" component={AddProducts} />
+        <Route exact path="/admin-products/new/:id" component={AddProducts} />
         <Route exact path="/check-out" component={CheckOut} />
         <Route exact path="/orders" component={Orders} />
         <Route exact path="/order-success" component={OrderSuccess} />

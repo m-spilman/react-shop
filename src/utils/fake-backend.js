@@ -14,6 +14,8 @@ export function configureFakeBackend() {
         switch (true) {
           case url.endsWith('/products/add') && method === 'POST':
             return addProduct();
+          case url.endsWith('/product/edit') && method === 'PUT':
+            return editProduct();
           case url.endsWith('/users/authenticate') && method === 'POST':
             return authenticate();
           case url.endsWith('/users/register') && method === 'POST':
@@ -34,6 +36,13 @@ export function configureFakeBackend() {
           ? Math.max(...products.map((newProduct) => newProduct.id)) + 1
           : 1;
         products.push(body);
+        localStorage.setItem('products', JSON.stringify(products));
+        return ok();
+      }
+      function editProduct() {
+        const product = body;
+        const index = product.id - 1;
+        products[index] = product;
         localStorage.setItem('products', JSON.stringify(products));
         return ok();
       }
