@@ -35,10 +35,16 @@ function addProduct(title, price, categoryId, imageUrl) {
       });
   };
 }
-function getProducts(products) {
+function getProducts() {
   return (dispatch) => {
-    Promise.resolve(dispatch({ type: actionTypes.GET_PRODUCTS_REQUEST })).then(
-      () => {
+    dispatch({ type: actionTypes.GET_PRODUCTS_REQUEST });
+    console.log('im in getProducts in action.js below dispatch');
+    productService.getProducts().then(
+      (products) => {
+        console.log(
+          'products in getProducts in action.js returned from ProductService',
+          products
+        );
         dispatch({ type: actionTypes.GET_PRODUCTS_SUCCESS, products });
       },
       (error) => {

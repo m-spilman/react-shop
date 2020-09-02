@@ -1,6 +1,6 @@
 import actions from './action-types';
-let products = JSON.parse(localStorage.getItem('products'));
-const initialState = products ? { loading: true, products } : {};
+// let products = JSON.parse(localStorage.getItem('products'));
+const initialState = { loading: false, products: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
