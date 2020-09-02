@@ -1,11 +1,16 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { productActions } from '../store/products/action';
 
 import DisplayTable from '../components/display-table';
 
 function AdminProducts() {
   const products = useSelector(({ products }) => products.products);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(productActions.getProducts());
+  }, [dispatch]);
 
   const displayedFields = [
     { header: 'ID', name: 'id' },
