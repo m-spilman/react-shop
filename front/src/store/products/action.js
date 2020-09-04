@@ -34,10 +34,11 @@ function addProduct(title, price, categoryId, imageUrl) {
       });
   };
 }
-function getProducts(products) {
+function getProducts() {
   return (dispatch) => {
-    Promise.resolve(dispatch({ type: actionTypes.GET_PRODUCTS_REQUEST })).then(
-      () => {
+    dispatch({ type: actionTypes.GET_PRODUCTS_REQUEST });
+    productService.getProducts().then(
+      (products) => {
         dispatch({ type: actionTypes.GET_PRODUCTS_SUCCESS, products });
       },
       (error) => {
@@ -47,6 +48,7 @@ function getProducts(products) {
     );
   };
 }
+
 function editProduct(title, price, categoryId, imageUrl, id) {
   return (dispatch) => {
     dispatch({

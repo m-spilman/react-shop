@@ -1,7 +1,6 @@
 import actions from './action-types';
 
-let products = JSON.parse(localStorage.getItem('products'));
-const initialState = products ? { loading: false, products } : {};
+const initialState = { loading: false, products: [] };
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -29,7 +28,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        products: action.products,
+        products: action.product,
       };
     case actions.ADD_PRODUCT_FAILURE:
       return {
